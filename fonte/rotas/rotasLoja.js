@@ -2,19 +2,19 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 
-const Loja = require('../esquemas/loja');
+const Loja = require('../esquemas/esquemaLoja');
 
 // get para /lojas
 router.get('/', (req, res) => {
-    res.status(200).json({
-        message: 'Get request to /products'
+    res.status(300).json({
+        message: "It works!"
     });
 });
 
-// get lojas por id interno do Mongo
-router.get('/:id', (req, res) => {
-    const id = req.params.id;
-    Loja.findOne({_id: id})
+// get lojas por chave
+router.get('/carregar/:chaveIdentificacao', (req, res) => {
+    const chaveIdentificacao = req.params.chaveIdentificacao;
+    Loja.findOne({chaveIdentificacao: chaveIdentificacao})
         .exec()
         .then(doc => {
             console.log("Do banco de dados:", doc);
@@ -26,11 +26,59 @@ router.get('/:id', (req, res) => {
         });
 });
 
-// get lojas por nome
-router.get('/CarregarPorNome/:nome', (req, res) => {
-    const nome = req.params.nome;
-    Loja.findOne({nome: nome})
+// Listar lojas
+router.get('/listar/:chaveIdentificacao', (req, res) => {
+    const chaveIdentificacao = req.params.chaveIdentificacao;
+    Loja.find({chaveIdentificacao: chaveIdentificacao})
         .exec()
+        .then(doc => {
+            console.log("Do banco de dados:", doc);
+            res.status(200).json(doc);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({error: err});
+        });
+});
+
+// post para
+router.post('/adicionar', (req, res) => {
+   const loja = new Loja({
+        _id: mongoose.Types.ObjectId(),
+        idProprietario: req.body.idProprietario,
+        idPessoa: req.body.idPessoa,
+        chaveIdentificacao: req.body.chaveIdentificacao,
+        idEndereco: req.body.idEndereco,
+        telefones: req.body.telefones,
+        entregaBairro: req.body.entregaBairro,
+        entregaArea: req.body.entregaArea
+    });
+
+    loja
+        .save()
+        .then(result => {
+            console.log(result);
+            res.status(201).json(result);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err
+            })
+        });
+});
+
+// alterar loja
+router.patch('/alterar/:chaveIdentificacao', (req, res) => {
+    const chaveIdentificacao = req.params.chaveIdentificacao; 
+    const alteracoes = {};
+
+    for(const [chave, valor] of Object.entries(req.body)){
+        alteracoes[chave] = valor;
+    }
+
+    Loja.update({chaveIdentificacao: chaveIdentificacao}, { $set: alteracoes})
+    .exec()
         .then(doc => {
             console.log("Do banco de dados:", doc);
             res.status(200).json(doc);
@@ -40,32 +88,5 @@ router.get('/CarregarPorNome/:nome', (req, res) => {
             res.status(500).json({error: err});
         });
 })
-
-// post para /lojas
-router.post('/', (req, res) => {
-   const loja = new Loja({
-        _id: new mongoose.Types.ObjectId(),
-        id_externo: req.body.id_externo,
-        nome: req.body.nome,
-        cep: req.body.cep,
-        rua: req.body.rua,
-        numero: req.body.numero,
-        cidade: req.body.cidade,
-        estado: req.body.estado,
-        localizacao: req.body.localizacao,
-        categorias: req.body.categorias
-    });
-
-    loja
-        .save()
-        .then(result => {
-            console.log(result);
-        })
-        .catch(err => console.log(err));
-
-    res.status(200).json({
-        message: 'Post request to /products'
-    });
-});
 
 module.exports = router;
