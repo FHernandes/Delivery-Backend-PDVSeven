@@ -1,0 +1,131 @@
+{
+	"info": {
+		"_postman_id": "e635ac69-6db5-4e2a-b5de-e42439ddfad7",
+		"name": "MS Delivery Online (local)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Lojas",
+			"item": [
+				{
+					"name": "Lojas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3333/lojas",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"lojas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Carregar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3333/lojas/carregar/ch2",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"lojas",
+								"carregar",
+								"ch2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3333/lojas/listar/ch1",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"lojas",
+								"listar",
+								"ch1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Adicionar",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idProprietario\": \"1\",\r\n    \"idPessoa\": \"1\",\r\n    \"chaveIdentificacao\": [\r\n        \"ch1\",\r\n        \"ch2\"\r\n    ],\r\n    \"idEndereco\": \"2\",\r\n    \"telefones\": [\r\n        {\r\n            \"idTelefone\": \"1\"\r\n        },\r\n        {\r\n            \"idTelefone\": \"2\"\r\n        }\r\n    ],\r\n    \"entregaBairro\": [\r\n        {\r\n            \"bairro\": \"Bairro das Águas\",\r\n            \"valor\": 20,\r\n            \"areaRecusada\": true\r\n        },\r\n        {\r\n            \"bairro\": \"Bairro da Ponte\",\r\n            \"valor\": 10,\r\n            \"areaRecusada\": true\r\n        }\r\n    ],\r\n    \"entregaArea\": [\r\n        {\r\n            \"distancia\": 15,\r\n            \"valor\": 10\r\n        },\r\n        {\r\n            \"distancia\": 10,\r\n            \"valor\": 5\r\n        }\r\n    ]\r\n}"
+						},
+						"url": {
+							"raw": "localhost:3333/lojas/adicionar",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"lojas",
+								"adicionar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alterar",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"telefones\": [\r\n        {\r\n            \"idTelefone\": \"7\"\r\n        },\r\n        {\r\n            \"idTelefone\": \"8\"\r\n        }\r\n    ]\r\n}"
+						},
+						"url": {
+							"raw": "localhost:3333/lojas/alterar/ch1",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"lojas",
+								"alterar",
+								"ch1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
