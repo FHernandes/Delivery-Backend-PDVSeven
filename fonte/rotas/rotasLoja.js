@@ -43,11 +43,19 @@ router.get('/listar/:chaveIdentificacao', (req, res) => {
 
 // post para
 router.post('/adicionar', (req, res) => {
-   const loja = new Loja({
+
+    let chaves = req.body.chaveIdentificacao;
+    let chavesFormatadas = [];
+
+    for(i = 0; i < chaves.length; i++){
+        chavesFormatadas.push(chaves[i].split(' ').join('-'));
+    }
+
+    const loja = new Loja({
         _id: mongoose.Types.ObjectId(),
         idProprietario: req.body.idProprietario,
         idPessoa: req.body.idPessoa,
-        chaveIdentificacao: req.body.chaveIdentificacao,
+        chaveIdentificacao: chavesFormatadas,
         idEndereco: req.body.idEndereco,
         telefones: req.body.telefones,
         entregaBairro: req.body.entregaBairro,
