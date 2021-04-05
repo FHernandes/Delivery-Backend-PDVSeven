@@ -19,10 +19,17 @@ router.get('/carregar/:chave', (req, res) => {
         .then(doc => {
             console.log("Do banco de dados:", doc);
 
-            let resultado = [];
+            let resultado = { };
+            resultado["_id"] = doc._id;
+            resultado["idProprietario"] = doc.idProprietario;
+            resultado["idPessoa"] = doc.idPessoa;
+
+            let chaveIdentificacao;
             for(i = 0; i < doc.chaveIdentificacao.length; i++){
                 if (doc.chaveIdentificacao[i].chave === chave){
-                    resultado = doc.chaveIdentificacao[i];
+                    chaveIdentificacao = doc.chaveIdentificacao[i];
+                    resultado["chaveIdentificacao"] = chaveIdentificacao;
+                    break;
                 }
             }
             
