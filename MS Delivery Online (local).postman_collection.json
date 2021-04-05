@@ -32,7 +32,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3333/lojas/carregar/ch2",
+							"raw": "localhost:3333/lojas/carregar/Loja-Andre",
 							"host": [
 								"localhost"
 							],
@@ -40,7 +40,7 @@
 							"path": [
 								"lojas",
 								"carregar",
-								"ch2"
+								"Loja-Andre"
 							]
 						}
 					},
@@ -52,7 +52,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3333/lojas/listar/ch1",
+							"raw": "localhost:3333/lojas/listar/1",
 							"host": [
 								"localhost"
 							],
@@ -60,7 +60,7 @@
 							"path": [
 								"lojas",
 								"listar",
-								"ch1"
+								"1"
 							]
 						}
 					},
@@ -79,7 +79,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"idProprietario\": \"1\",\r\n    \"idPessoa\": \"1\",\r\n    \"chaveIdentificacao\": [\r\n        \"ch1\",\r\n        \"ch2\"\r\n    ],\r\n    \"idEndereco\": \"2\",\r\n    \"telefones\": [\r\n        {\r\n            \"idTelefone\": \"1\"\r\n        },\r\n        {\r\n            \"idTelefone\": \"2\"\r\n        }\r\n    ],\r\n    \"entregaBairro\": [\r\n        {\r\n            \"bairro\": \"Bairro das Águas\",\r\n            \"valor\": 20,\r\n            \"areaRecusada\": true\r\n        },\r\n        {\r\n            \"bairro\": \"Bairro da Ponte\",\r\n            \"valor\": 10,\r\n            \"areaRecusada\": true\r\n        }\r\n    ],\r\n    \"entregaArea\": [\r\n        {\r\n            \"distancia\": 15,\r\n            \"valor\": 10\r\n        },\r\n        {\r\n            \"distancia\": 10,\r\n            \"valor\": 5\r\n        }\r\n    ]\r\n}"
+							"raw": "{\r\n    \"idProprietario\": \"1\",\r\n    \"idPessoa\": \"1\",\r\n    \"chaveIdentificacao\": [\r\n        {\r\n            \"chave\": \"Loja Andre\",\r\n            \"idEndereco\": \"1\",\r\n            \"telefones\": [\r\n                {\r\n                    \"idTelefone\": \"1\"\r\n                },\r\n                {\r\n                    \"idTelefone\": \"2\"\r\n                }\r\n            ],\r\n            \"entregaBairro\": [\r\n                {\r\n                    \"bairro\": \"Centro\",\r\n                    \"valor\": 4.00,\r\n                    \"areaRecusada\": false\r\n                },\r\n                {\r\n                    \"bairro\": \"Bairro da Ponte\",\r\n                    \"valor\": 0,\r\n                    \"areaRecusada\": true\r\n                }\r\n            ],\r\n            \"entregaArea\": [\r\n                {\r\n                    \"distancia\": 2,\r\n                    \"valor\": 4.00\r\n                },\r\n                {\r\n                    \"distancia\": 5,\r\n                    \"valor\": 7.50\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"chave\": \"Loja Fernanda\",\r\n            \"idEndereco\": \"1\",\r\n            \"telefones\": [\r\n                {\r\n                    \"idTelefone\": \"1\"\r\n                },\r\n                {\r\n                    \"idTelefone\": \"2\"\r\n                }\r\n            ],\r\n            \"entregaBairro\": [\r\n                {\r\n                    \"bairro\": \"Centro\",\r\n                    \"valor\": 5.00,\r\n                    \"areaRecusada\": false\r\n                },\r\n                {\r\n                    \"bairro\": \"Bairro da Ponte\",\r\n                    \"valor\": 3.50,\r\n                    \"areaRecusada\": false\r\n                }\r\n            ],\r\n            \"entregaArea\": [\r\n                {\r\n                    \"distancia\": 2,\r\n                    \"valor\": 2.50\r\n                },\r\n                {\r\n                    \"distancia\": 5,\r\n                    \"valor\": 5.50\r\n                }\r\n            ]\r\n        }\r\n    ]\r\n}"
 						},
 						"url": {
 							"raw": "localhost:3333/lojas/adicionar",
@@ -108,10 +108,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"telefones\": [\r\n        {\r\n            \"idTelefone\": \"7\"\r\n        },\r\n        {\r\n            \"idTelefone\": \"8\"\r\n        }\r\n    ]\r\n}"
+							"raw": "{\r\n    \"chaveIdentificacao\":[\r\n        {\r\n            \"telefones\": [\r\n                {\r\n                    \"idTelefone\": \"7\"\r\n                },\r\n                {\r\n                    \"idTelefone\": \"8\"\r\n                }\r\n            ]\r\n        }\r\n    ]\r\n}"
 						},
 						"url": {
-							"raw": "localhost:3333/lojas/alterar/ch1",
+							"raw": "localhost:3333/lojas/alterar/Loja-Andre",
 							"host": [
 								"localhost"
 							],
@@ -119,7 +119,7 @@
 							"path": [
 								"lojas",
 								"alterar",
-								"ch1"
+								"Loja-Andre"
 							]
 						}
 					},
