@@ -14,11 +14,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3333/lojas",
+							"raw": "{{API_DeliveryOnline}}/lojas",
 							"host": [
-								"localhost"
+								"{{API_DeliveryOnline}}"
 							],
-							"port": "3333",
 							"path": [
 								"lojas"
 							]
@@ -32,11 +31,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3333/lojas/carregar/Loja-Andre",
+							"raw": "{{API_DeliveryOnline}}/lojas/carregar/Loja-Andre",
 							"host": [
-								"localhost"
+								"{{API_DeliveryOnline}}"
 							],
-							"port": "3333",
 							"path": [
 								"lojas",
 								"carregar",
@@ -52,11 +50,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3333/lojas/listar/1",
+							"raw": "{{API_DeliveryOnline}}/lojas/listar/1",
 							"host": [
-								"localhost"
+								"{{API_DeliveryOnline}}"
 							],
-							"port": "3333",
 							"path": [
 								"lojas",
 								"listar",
@@ -82,11 +79,10 @@
 							"raw": "{\r\n    \"idProprietario\": \"1\",\r\n    \"idPessoa\": \"1\",\r\n    \"chaveIdentificacao\": [\r\n        {\r\n            \"chave\": \"Loja Andre\",\r\n            \"idEndereco\": \"1\",\r\n            \"telefones\": [\r\n                {\r\n                    \"idTelefone\": \"1\"\r\n                },\r\n                {\r\n                    \"idTelefone\": \"2\"\r\n                }\r\n            ],\r\n            \"entregaBairro\": [\r\n                {\r\n                    \"bairro\": \"Centro\",\r\n                    \"valor\": 4.00,\r\n                    \"areaRecusada\": false\r\n                },\r\n                {\r\n                    \"bairro\": \"Bairro da Ponte\",\r\n                    \"valor\": 0,\r\n                    \"areaRecusada\": true\r\n                }\r\n            ],\r\n            \"entregaArea\": [\r\n                {\r\n                    \"distancia\": 2,\r\n                    \"valor\": 4.00\r\n                },\r\n                {\r\n                    \"distancia\": 5,\r\n                    \"valor\": 7.50\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"chave\": \"Loja Fernanda\",\r\n            \"idEndereco\": \"1\",\r\n            \"telefones\": [\r\n                {\r\n                    \"idTelefone\": \"1\"\r\n                },\r\n                {\r\n                    \"idTelefone\": \"2\"\r\n                }\r\n            ],\r\n            \"entregaBairro\": [\r\n                {\r\n                    \"bairro\": \"Centro\",\r\n                    \"valor\": 5.00,\r\n                    \"areaRecusada\": false\r\n                },\r\n                {\r\n                    \"bairro\": \"Bairro da Ponte\",\r\n                    \"valor\": 3.50,\r\n                    \"areaRecusada\": false\r\n                }\r\n            ],\r\n            \"entregaArea\": [\r\n                {\r\n                    \"distancia\": 2,\r\n                    \"valor\": 2.50\r\n                },\r\n                {\r\n                    \"distancia\": 5,\r\n                    \"valor\": 5.50\r\n                }\r\n            ]\r\n        }\r\n    ]\r\n}"
 						},
 						"url": {
-							"raw": "localhost:3333/lojas/adicionar",
+							"raw": "{{API_DeliveryOnline}}/lojas/adicionar",
 							"host": [
-								"localhost"
+								"{{API_DeliveryOnline}}"
 							],
-							"port": "3333",
 							"path": [
 								"lojas",
 								"adicionar"
@@ -111,11 +107,10 @@
 							"raw": "{\r\n    \"chaveIdentificacao\":[\r\n        {\r\n            \"telefones\": [\r\n                {\r\n                    \"idTelefone\": \"7\"\r\n                },\r\n                {\r\n                    \"idTelefone\": \"8\"\r\n                }\r\n            ]\r\n        }\r\n    ]\r\n}"
 						},
 						"url": {
-							"raw": "localhost:3333/lojas/alterar/Loja-Andre",
+							"raw": "{{API_DeliveryOnline}}/lojas/alterar/Loja-Andre",
 							"host": [
-								"localhost"
+								"{{API_DeliveryOnline}}"
 							],
-							"port": "3333",
 							"path": [
 								"lojas",
 								"alterar",
@@ -126,6 +121,12 @@
 					"response": []
 				}
 			]
+		}
+	],
+	"variable": [
+		{
+			"key": "API_DeliveryOnline",
+			"value": "localhost:4444"
 		}
 	]
 }
