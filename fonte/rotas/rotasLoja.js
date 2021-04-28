@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
+const { v4: uuidv4 } = require('uuid');
 
 const Loja = require('../esquemas/esquemaLoja');
 
@@ -56,10 +57,11 @@ router.get('/listar/:idProprietario', (req, res) => {
         });
 });
 
-// post para
+// post para lojas/adicionar
 router.post('/adicionar', (req, res) => {
 
     let chavesArray = req.body.chaveIdentificacao;
+    const idProprietario = uuidv4();
 
     for(i = 0; i < chavesArray.length; i++){
         //chavesFormatadas.push(chaves[i].split(' ').join('-'));
@@ -68,7 +70,7 @@ router.post('/adicionar', (req, res) => {
 
     const loja = new Loja({
         _id: mongoose.Types.ObjectId(),
-        idProprietario: req.body.idProprietario,
+        idProprietario: idProprietario,
         idPessoa: req.body.idPessoa,
         chaveIdentificacao: chavesArray,
         idEndereco: req.body.idEndereco,
