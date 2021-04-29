@@ -60,37 +60,56 @@ router.get('/listar/:idProprietario', (req, res) => {
 // post para lojas/adicionar
 router.post('/adicionar', (req, res) => {
 
-    let chavesArray = req.body.chaveIdentificacao;
-    const idProprietario = uuidv4();
+    const chave = req.body.chaveIdentificacao[0].chave;
+    const chaveFormatada = chave.split(' ').join('-');
 
-    for(i = 0; i < chavesArray.length; i++){
-        //chavesFormatadas.push(chaves[i].split(' ').join('-'));
-        chavesArray[i].chave = chavesArray[i].chave.split(' ').join('-');
-    }
-
-    const loja = new Loja({
-        _id: mongoose.Types.ObjectId(),
-        idProprietario: idProprietario,
-        idPessoa: req.body.idPessoa,
-        chaveIdentificacao: chavesArray,
-        idEndereco: req.body.idEndereco,
-        telefones: req.body.telefones,
-        entregaBairro: req.body.entregaBairro,
-        entregaArea: req.body.entregaArea
-    });
-
-    loja
-        .save()
-        .then(result => {
-            console.log(result);
-            res.status(201).json(result);
-        })
+    const LojaExiste = Loja.findOne({chaveIdentificacao: {$elemMatch: {chave: chaveFormatada}}})
+        .exec()
+        .then()
         .catch(err => {
             console.log(err);
-            res.status(500).json({
-                error: err
-            })
+            res.status(500).json({error: err});
         });
+
+    if(!LojaExiste){
+
+        let chavesArray = req.body.chaveIdentificacao;
+        const idProprietario = uuidv4();
+
+        for(i = 0; i < chavesArray.length; i++){
+            //chavesFormatadas.push(chaves[i].split(' ').join('-'));
+            chavesArray[i].chave = chavesArray[i].chave.split(' ').join('-');
+        }
+
+        const loja = new Loja({
+            _id: mongoose.Types.ObjectId(),
+            idProprietario: idProprietario,
+            idPessoa: req.body.idPessoa,
+            chaveIdentificacao: chavesArray,
+            idEndereco: req.body.idEndereco,
+            telefones: req.body.telefones,
+            entregaBairro: req.body.entregaBairro,
+            entregaArea: req.body.entregaArea
+        });
+
+        loja
+            .save()
+            .then(result => {
+                console.log(result);
+                res.status(201).json(result);
+            })
+            .catch(err => {
+                console.log(err);
+                res.status(500).json({
+                    error: err
+                })
+            });
+    }
+    else{
+        res.status(500).json({
+            erro: "Erro: Recurso já foi armazenado no servidor."
+        })
+    }
 });
 
 /*router.patch('/alterar/:id/:chave', (req, res) => {
