@@ -58,12 +58,12 @@ router.get('/listar/:idProprietario', (req, res) => {
 });
 
 // post para lojas/adicionar
-router.post('/adicionar', (req, res) => {
+router.post('/adicionar', async (req, res) => {
 
     const chave = req.body.chaveIdentificacao[0].chave;
     const chaveFormatada = chave.split(' ').join('-');
 
-    const LojaExiste = Loja.findOne({chaveIdentificacao: {$elemMatch: {chave: chaveFormatada}}})
+    let LojaExiste = await Loja.findOne({chaveIdentificacao: {$elemMatch: {chave: chaveFormatada}}})
         .exec()
         .then()
         .catch(err => {
@@ -71,7 +71,7 @@ router.post('/adicionar', (req, res) => {
             res.status(500).json({error: err});
         });
 
-    if(!LojaExiste){
+    if(LojaExiste === null){
 
         let chavesArray = req.body.chaveIdentificacao;
         const idProprietario = uuidv4();
