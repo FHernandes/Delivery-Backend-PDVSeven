@@ -57,6 +57,20 @@ router.get('/listar/:idProprietario', (req, res) => {
         });
 });
 
+// Listar todas lojas
+router.get('/listarLojas', (req, res) => {
+    Loja.find()
+        .exec()
+        .then(doc => {
+            console.log("Do banco de dados:", doc);
+            res.status(200).json(doc);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({error: err});
+        });
+});
+
 // post para lojas/adicionar
 router.post('/adicionar', async (req, res) => {
 
