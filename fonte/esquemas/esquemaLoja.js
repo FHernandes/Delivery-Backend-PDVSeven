@@ -4,30 +4,25 @@ const EsquemaLoja = new mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectID,
     idProprietario: String,
     idPessoa: String,
-    chaveIdentificacao: [
+    chaveIdentificacao: [String],
+    telefones: [
       {
-        chave: String,
-        idEndereco: String,
-        telefones: [
-          {
-            idTelefone: String
-          }
-        ],
-        entregaBairro: [
-          {
-            bairro: String,
-            valor: Number,
-            areaRecusada: Boolean
-          }
-        ],
-        entregaArea: [
-          {
-            distancia: Number,
-            valor: Number
-          }
-        ]
+        idTelefone: String
       }
     ],
+    entregaBairro: [
+      {
+        bairro: String,
+        valor: Number,
+        areaRecusada: Boolean
+      }
+    ],
+    entregaArea: [
+      {
+        distancia: Number,
+        valor: Number
+      }
+    ]
 });
 
 module.exports = mongoose.model('Loja', EsquemaLoja);
