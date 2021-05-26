@@ -15,7 +15,8 @@ router.get('/', (req, res) => {
 // get lojas por chave
 router.get('/carregar/:chave', (req, res) => {
     const chave = req.params.chave;
-    Loja.findOne({chaveIdentificacao: {$elemMatch: {chave: chave}}})
+    // {chaveIdentificacao: {$elemMatch: {chave: chave}}}
+    Loja.findOne({chaveIdentificacao: chave})
         .exec()
         .then(doc => {
             console.log("Do banco de dados:", doc);
@@ -61,10 +62,12 @@ router.post('/adicionar', async (req, res) => {
 
     let lojaExiste = false;
     let loja = null;
+    let chave;
     const chaves = req.body.chaveIdentificacao;
 
     for(i = 0; i < chaves.length; i++){
-        loja = await Loja.findOne({chaveIdentificacao: {$elemMatch: {chave: chaveFormatada}}})
+        chave = chaves[i].split(' ').join('-');
+        loja = await Loja.findOne({chaveIdentificacao: chave})
         .exec()
         .then()
         .catch(err => {
