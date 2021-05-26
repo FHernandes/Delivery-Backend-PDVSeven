@@ -59,10 +59,12 @@ router.get('/listarLojas', (req, res) => {
 // post para lojas/adicionar
 router.post('/adicionar', async (req, res) => {
 
-    const chave = req.body.chaveIdentificacao[0].chave;
-    const chaveFormatada = chave.split(' ').join('-');
+    let lojaExiste = false;
+    let loja = null;
+    const chaves = req.body.chaveIdentificacao;
 
-    let LojaExiste = await Loja.findOne({chaveIdentificacao: {$elemMatch: {chave: chaveFormatada}}})
+    for(i = 0; i < chaves.length; i++){
+        loja = await Loja.findOne({chaveIdentificacao: {$elemMatch: {chave: chaveFormatada}}})
         .exec()
         .then()
         .catch(err => {
@@ -70,14 +72,20 @@ router.post('/adicionar', async (req, res) => {
             res.status(500).json({error: err});
         });
 
-    if(LojaExiste === null){
+        if(loja != null){
+            lojaExiste = true;
+            break;
+        }
+    }
+
+    if(!lojaExiste){
 
         let chavesArray = req.body.chaveIdentificacao;
         const idProprietario = uuidv4();
 
         for(i = 0; i < chavesArray.length; i++){
             //chavesFormatadas.push(chaves[i].split(' ').join('-'));
-            chavesArray[i].chave = chavesArray[i].chave.split(' ').join('-');
+            chavesArray[i] = chavesArray[i].split(' ').join('-');
         }
 
         const loja = new Loja({
@@ -106,7 +114,7 @@ router.post('/adicionar', async (req, res) => {
     }
     else{
         res.status(500).json({
-            erro: "Erro: Recurso já foi armazenado no servidor."
+            erro: "Erro: Pelo menos uma das chaves de identificação já foi cadastrada previamente."
         })
     }
 });
