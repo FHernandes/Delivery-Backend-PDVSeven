@@ -99,7 +99,9 @@ router.post('/adicionar', async (req, res) => {
             idEndereco: req.body.idEndereco,
             telefones: req.body.telefones,
             entregaBairro: req.body.entregaBairro,
-            entregaArea: req.body.entregaArea
+            entregaArea: req.body.entregaArea,
+            linkFacebook: req.body.linkFacebook,
+            linkInstagram: req.body.linkInstagram
         });
 
         loja

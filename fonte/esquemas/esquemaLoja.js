@@ -22,7 +22,9 @@ const EsquemaLoja = new mongoose.Schema({
         distancia: Number,
         valor: Number
       }
-    ]
+    ],
+    linkFacebook: String,
+    linkInstagram: String
 });
 
 module.exports = mongoose.model('Loja', EsquemaLoja);
