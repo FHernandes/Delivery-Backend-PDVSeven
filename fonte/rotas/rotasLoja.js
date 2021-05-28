@@ -124,6 +124,31 @@ router.post('/adicionar', async (req, res) => {
     }
 });
 
+router.put('/alterar/:idProprietario/:id', (req, res) => {
+    const id = req.params.id;
+    const idProprietario = req.params.idProprietario; 
+    const alteracoes = {};
+
+    for(const [ch, val] of Object.entries(req.body)){
+        alteracoes[ch] = val;
+    }
+
+    Loja.update(
+        {_id: id}, 
+        { $set: alteracoes},
+        {arrayFilters: [{idProprietario: idProprietario, _id: id}]}
+    )
+    .exec()
+        .then(doc => {
+            console.log("Do banco de dados:", doc);
+            res.status(200).json(doc);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({error: err});
+        });
+});
+
 /*router.patch('/alterar/:id/:chave', (req, res) => {
     const id = req.params.id;
     const chave = req.params.chave; 
