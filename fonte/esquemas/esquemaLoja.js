@@ -5,11 +5,7 @@ const EsquemaLoja = new mongoose.Schema({
     idProprietario: String,
     idPessoa: String,
     chaveIdentificacao: [String],
-    telefones: [
-      {
-        idTelefone: String
-      }
-    ],
+    telefones: [String],
     entregaBairro: [
       {
         bairro: String,
