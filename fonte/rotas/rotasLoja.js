@@ -15,10 +15,9 @@ router.get('/', (req, res) => {
 // get lojas por chave
 router.get('/carregar/:chave', (req, res) => {
     const chave = req.params.chave;
-    chave.toLowerCase();
-    chave.split('-').join('');
+    const chaveId = chave.split('-').join('').toLowerCase();
     // {chaveIdentificacao: {$elemMatch: {chave: chave}}}
-    Loja.findOne({chaveIdentificacao: chave})
+    Loja.findOne({chaveIdentificacao: chaveId})
         .exec()
         .then(doc => {
             console.log("Do banco de dados:", doc);
