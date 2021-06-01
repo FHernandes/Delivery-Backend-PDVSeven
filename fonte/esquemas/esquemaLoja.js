@@ -5,6 +5,7 @@ const EsquemaLoja = new mongoose.Schema({
     idProprietario: String,
     idPessoa: String,
     chaveIdentificacao: [String],
+    chaveFormatada: [String],
     telefones: [String],
     entregaBairro: [
       {
@@ -19,8 +20,12 @@ const EsquemaLoja = new mongoose.Schema({
         valor: Number
       }
     ],
-    linkFacebook: String,
-    linkInstagram: String
+    links: [
+      {
+        nome: String,
+        url: String
+      }
+    ]
 });
 
 module.exports = mongoose.model('Loja', EsquemaLoja);
