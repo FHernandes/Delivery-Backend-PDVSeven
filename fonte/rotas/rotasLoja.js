@@ -15,6 +15,8 @@ router.get('/', (req, res) => {
 // get lojas por chave
 router.get('/carregar/:chave', (req, res) => {
     const chave = req.params.chave;
+    chave.toLowerCase();
+    chave.split('-').join('');
     // {chaveIdentificacao: {$elemMatch: {chave: chave}}}
     Loja.findOne({chaveIdentificacao: chave})
         .exec()
@@ -67,6 +69,7 @@ router.post('/adicionar', async (req, res) => {
 
     for(i = 0; i < chaves.length; i++){
         chave = chaves[i].split(' ').join('-');
+        chave.toLowerCase();
         loja = await Loja.findOne({chaveIdentificacao: chave})
         .exec()
         .then()
@@ -84,11 +87,13 @@ router.post('/adicionar', async (req, res) => {
     if(!lojaExiste){
 
         let chavesArray = req.body.chaveIdentificacao;
+        let chavesFormatadasArray = [];
         const idProprietario = uuidv4();
 
         for(i = 0; i < chavesArray.length; i++){
             //chavesFormatadas.push(chaves[i].split(' ').join('-'));
-            chavesArray[i] = chavesArray[i].split(' ').join('-');
+            chavesFormatadasArray[i] = chavesArray[i].split(' ').join('-');
+            chavesArray[i] = chavesArray[i].split(' ').join('').toLowerCase();
         }
 
         const loja = new Loja({
@@ -96,12 +101,12 @@ router.post('/adicionar', async (req, res) => {
             idProprietario: idProprietario,
             idPessoa: req.body.idPessoa,
             chaveIdentificacao: chavesArray,
+            chaveFormatada: chavesFormatadasArray,
             idEndereco: req.body.idEndereco,
             telefones: req.body.telefones,
             entregaBairro: req.body.entregaBairro,
             entregaArea: req.body.entregaArea,
-            linkFacebook: req.body.linkFacebook,
-            linkInstagram: req.body.linkInstagram
+            link: req.body.link
         });
 
         loja
