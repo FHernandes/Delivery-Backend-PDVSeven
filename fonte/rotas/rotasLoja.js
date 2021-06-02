@@ -20,23 +20,29 @@ router.get('/carregar/:chave', (req, res) => {
     Loja.findOne({chaveIdentificacao: chaveId})
         .exec()
         .then(doc => {
-            let resposta = doc;
-            let pos = 0;
-            let chaveResposta = [ ];
+            if(doc != null){
+                let resposta = doc;
+                let pos = 0;
+                let chaveResposta = [ ];
 
-            for(i = 0; i < doc.chaveIdentificacao.length; i++){
-                if(doc.chaveIdentificacao[i] == chaveId){
-                    pos = i;
-                    break;
+                for(i = 0; i < doc.chaveIdentificacao.length; i++){
+                    if(doc.chaveIdentificacao[i] == chaveId){
+                        pos = i;
+                        break;
+                    }
                 }
+
+                chaveResposta.push(doc.chaveFormatada[pos]);
+
+                resposta.chaveFormatada = chaveResposta;
+                
+                console.log("Do banco de dados:", resposta);
+                res.status(200).json(resposta);
             }
-
-            chaveResposta.push(doc.chaveFormatada[pos]);
-
-            resposta.chaveFormatada = chaveResposta;
-            
-            console.log("Do banco de dados:", resposta);
-            res.status(200).json(resposta);
+            else{
+                console.log("Do banco de dados:", doc);
+                res.status(200).json(doc);
+            }
         })
         .catch(err => {
             console.log(err);
