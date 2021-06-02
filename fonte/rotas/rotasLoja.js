@@ -24,7 +24,7 @@ router.get('/carregar/:chave', (req, res) => {
             let pos = 0;
             let chaveResposta = [ ];
 
-            for(i = 0; i < chaveIdentificacao.length; i++){
+            for(i = 0; i < doc.chaveIdentificacao.length; i++){
                 if(chaveIdentificacao[i] == chaveId){
                     pos = i;
                     break;
