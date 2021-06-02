@@ -126,7 +126,7 @@ router.post('/adicionar', async (req, res) => {
             telefones: req.body.telefones,
             entregaBairro: req.body.entregaBairro,
             entregaArea: req.body.entregaArea,
-            link: req.body.link
+            links: req.body.links
         });
 
         loja
