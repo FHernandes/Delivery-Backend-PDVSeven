@@ -30,3 +30,5 @@ mongoose.connect(bd, {useNewUrlParser: true, useUnifiedTopology: true});
 app.use('/lojas', rotasLojas);
 
 module.exports = app;
+
+//teste
