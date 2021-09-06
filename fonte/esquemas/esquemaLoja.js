@@ -4,6 +4,7 @@ const EsquemaLoja = new mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectID,
     idProprietario: String,
     idPessoa: String,
+    lojaDisponivel: Boolean,
     chaveIdentificacao: [String],
     chaveFormatada: [String],
     telefones: [String],

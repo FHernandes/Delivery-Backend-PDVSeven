@@ -74,7 +74,7 @@ router.get('/listarLojas', (req, res) => {
             res.status(200).json(doc);
         })
         .catch(err => {
-            console.log(err);
+            console.log(err);   
             res.status(500).json({error: err});
         });
 });
@@ -120,6 +120,7 @@ router.post('/adicionar', async (req, res) => {
             _id: mongoose.Types.ObjectId(),
             idProprietario: idProprietario,
             idPessoa: req.body.idPessoa,
+            lojaDisponivel: false,
             chaveIdentificacao: chavesArray,
             chaveFormatada: chavesFormatadasArray,
             idEndereco: req.body.idEndereco,
@@ -148,6 +149,57 @@ router.post('/adicionar', async (req, res) => {
         })
     }
 });
+
+
+router.post('/abrirLoja/:idProprietario/:id', (req, res) => {
+    const idProprietario = req.params.idProprietario;
+    const id = req.params.id;
+
+    Loja.findOne({idProprietario: idProprietario, _id: id})
+    .exec()
+        .then(doc => {
+
+            doc.lojaDisponivel = true;
+
+            doc
+                .save()
+                .then(result => {
+                    res.status(200).json(result);
+                })
+                .catch(err => {
+                    res.status(500).json({error: err});
+                });                        
+            })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({error: err});
+        });
+})
+
+router.post('/fecharLoja/:idProprietario/:id', (req, res) => {
+    const idProprietario = req.params.idProprietario;
+    const id = req.params.id;
+
+    Loja.findOne({idProprietario: idProprietario, _id: id})
+    .exec()
+        .then(doc => {
+
+            doc.lojaDisponivel = false;
+
+            doc
+                .save()
+                .then(result => {
+                    res.status(200).json(result);
+                })
+                .catch(err => {
+                    res.status(500).json({error: err});
+                });                        
+            })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({error: err});
+        });
+})
 
 router.put('/alterar/:idProprietario/:id', (req, res) => {
     const id = req.params.id;
