@@ -120,6 +120,7 @@ router.post('/adicionar', async (req, res) => {
             _id: mongoose.Types.ObjectId(),
             idProprietario: idProprietario,
             idPessoa: req.body.idPessoa,
+            ativo: true,
             lojaDisponivel: false,
             chaveIdentificacao: chavesArray,
             chaveFormatada: chavesFormatadasArray,
